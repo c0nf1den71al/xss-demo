@@ -67,7 +67,7 @@ export default function Home() {
         let inArray = false;
 
         Object.entries(item).forEach(([key, value]) => {
-          if (value.toString().toLowerCase().includes(query.toLowerCase())) {
+          if (value.toString().toLowerCase().includes(query.toLowerCase()) && !inArray) {
             inArray = true
             results.push(item)
           }
